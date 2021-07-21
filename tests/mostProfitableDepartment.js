@@ -1,0 +1,143 @@
+function mostProfitableDepartment(salesData1){
+    const departListing ={};
+    for (var i=0;i<salesData1.length;i++){
+      const prod = salesData1[i];
+      departListing[prod.department]=0;
+      
+    }
+     for(var i=0; i<salesData1.length;i++){
+       const prod = salesData1[i];
+       var depart = departListing[prod.department];
+       depart += prod.sales;
+       departListing[prod.department]= depart 
+  }
+    var currSales=0;
+    var currDepart= '';
+    for(const departSales in departListing){
+      const currDepartSales =departListing[departSales];
+      if(currDepartSales>currSales){
+       currSales=currDepartSales;
+        currDepart=departSales;
+      }
+    }
+    return currDepart;
+  }
+  
+  function mostProfitableDay(saleData2){
+    const profit = {};
+    for(var i=0;i<saleData2.length;i++){
+      const prod1= saleData2[i];
+      profit[prod1.day]=0;
+    }
+    for(var i=0;i<saleData2.length;i++){
+      const prod1=saleData2[i];
+      
+      var currDay= profit[prod1.day];
+      currDay += prod1.sales;
+      profit[prod1.day]=currDay;
+    }
+    var currSales =0;
+    var currDay = '';
+    for(const daySales in profit){
+      const currDaySales=profit[daySales];
+      if(currDaySales>currSales){
+        currSales=currDaySales;
+        currDay=daySales;
+      }
+    }
+    return currDay;
+  }
+
+  describe('mostProfitableDepartment',function(){
+    it("This should show Most profitable department is 'outdoor' for dataset 1",function(){
+        var salesData = [
+            {department : 'hardware', sales : 4500, day : 'Monday'},
+            {department : 'outdoor', sales : 1500, day : 'Monday'},
+            {department : 'carpentry', sales : 5500, day : 'Monday'},
+            {department : 'hardware', sales : 7500, day : 'Tuesday'},
+            {department : 'outdoor', sales : 2505, day : 'Tuesday'},
+            {department : 'carpentry', sales : 1540, day : 'Tuesday'},
+            {department : 'hardware', sales : 1500, day : 'Wednesday'},
+            {department : 'outdoor', sales : 8507, day : 'Wednesday'},
+            {department : 'carpentry', sales : 8009, day : 'Wednesday'},
+            {department : 'hardware', sales : 12000, day : 'Thursday'},
+            {department : 'outdoor', sales : 18007, day : 'Thursday'},
+            {department : 'carpentry', sales : 6109, day : 'Thursday'},
+            {department : 'hardware', sales : 7005, day : 'Friday'},
+            {department : 'outdoor', sales : 12006, day : 'Friday'},
+            {department : 'carpentry', sales : 16109, day : 'Friday'},
+        ];
+        assert.equal('outdoor', mostProfitableDepartment(salesData), "Most profitable department is 'outdoor' for dataset 1");
+    })
+    it("This should show Most profitable department is 'electronics' for dataset 2",function(){
+        var salesData2 = [
+            {department : 'electronics', sales : 4500, day : 'Monday'},
+            {department : 'outdoor', sales : 1500, day : 'Monday'},
+            {department : 'carpentry', sales : 5500, day : 'Monday'},
+            {department : 'steelwork', sales : 7500, day : 'Tuesday'},
+            {department : 'outdoor', sales : 2505, day : 'Tuesday'},
+            {department : 'carpentry', sales : 1540, day : 'Tuesday'},
+            {department : 'hardware', sales : 1500, day : 'Wednesday'},
+            {department : 'outdoor', sales : 8507, day : 'Wednesday'},
+            {department : 'carpentry', sales : 8009, day : 'Wednesday'},
+            {department : 'hardware', sales : 12000, day : 'Thursday'},
+            {department : 'carpentry', sales : 6109, day : 'Thursday'},
+            {department : 'hardware', sales : 7005, day : 'Friday'},
+            {department : 'electronics', sales : 12006, day : 'Friday'},
+            {department : 'electronics', sales : 16109, day : 'Saturday'},
+            {department : 'steelwork', sales : 7500, day : 'Tuesday'},
+            {department : 'outdoor', sales : 2505, day : 'Tuesday'},
+            {department : 'carpentry', sales : 1540, day : 'Tuesday'},
+            {department : 'steelwork', sales : 1500, day : 'Wednesday'},
+            {department : 'carpentry', sales : 8009, day : 'Wednesday'},
+        ];
+        
+         assert.equal('electronics', mostProfitableDepartment(salesData2), "Most profitable department is 'electronics' for dataset 2");
+    })
+
+    it("This should show Most profitable day is 'Thursday' for dataset 1",function(){
+        var salesData = [
+            {department : 'hardware', sales : 4500, day : 'Monday'},
+            {department : 'outdoor', sales : 1500, day : 'Monday'},
+            {department : 'carpentry', sales : 5500, day : 'Monday'},
+            {department : 'hardware', sales : 7500, day : 'Tuesday'},
+            {department : 'outdoor', sales : 2505, day : 'Tuesday'},
+            {department : 'carpentry', sales : 1540, day : 'Tuesday'},
+            {department : 'hardware', sales : 1500, day : 'Wednesday'},
+            {department : 'outdoor', sales : 8507, day : 'Wednesday'},
+            {department : 'carpentry', sales : 8009, day : 'Wednesday'},
+            {department : 'hardware', sales : 12000, day : 'Thursday'},
+            {department : 'outdoor', sales : 18007, day : 'Thursday'},
+            {department : 'carpentry', sales : 6109, day : 'Thursday'},
+            {department : 'hardware', sales : 7005, day : 'Friday'},
+            {department : 'outdoor', sales : 12006, day : 'Friday'},
+            {department : 'carpentry', sales : 16109, day : 'Friday'},
+        ];    
+        assert.equal('Thursday', mostProfitableDay(salesData), "Most profitable day is 'Thursday' for dataset 1");
+    })
+    it("This should show ost profitable day is 'Wednesday' for dataset 2",function(){
+        var salesData2 = [
+            {department : 'electronics', sales : 4500, day : 'Monday'},
+            {department : 'outdoor', sales : 1500, day : 'Monday'},
+            {department : 'carpentry', sales : 5500, day : 'Monday'},
+            {department : 'steelwork', sales : 7500, day : 'Tuesday'},
+            {department : 'outdoor', sales : 2505, day : 'Tuesday'},
+            {department : 'carpentry', sales : 1540, day : 'Tuesday'},
+            {department : 'hardware', sales : 1500, day : 'Wednesday'},
+            {department : 'outdoor', sales : 8507, day : 'Wednesday'},
+            {department : 'carpentry', sales : 8009, day : 'Wednesday'},
+            {department : 'hardware', sales : 12000, day : 'Thursday'},
+            {department : 'carpentry', sales : 6109, day : 'Thursday'},
+            {department : 'hardware', sales : 7005, day : 'Friday'},
+            {department : 'electronics', sales : 12006, day : 'Friday'},
+            {department : 'electronics', sales : 16109, day : 'Saturday'},
+            {department : 'steelwork', sales : 7500, day : 'Tuesday'},
+            {department : 'outdoor', sales : 2505, day : 'Tuesday'},
+            {department : 'carpentry', sales : 1540, day : 'Tuesday'},
+            {department : 'steelwork', sales : 1500, day : 'Wednesday'},
+            {department : 'carpentry', sales : 8009, day : 'Wednesday'},
+        ];
+        
+        assert.equal('Wednesday', mostProfitableDay(salesData2), "Most profitable day is 'Wednesday' for dataset 2");
+    })
+});
